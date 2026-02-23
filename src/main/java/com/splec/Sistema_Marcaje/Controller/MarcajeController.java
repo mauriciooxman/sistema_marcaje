@@ -1,5 +1,6 @@
 package com.splec.Sistema_Marcaje.Controller;
 
+import com.splec.Sistema_Marcaje.Dto.MarcajeDTO;
 import com.splec.Sistema_Marcaje.Model.Marcaje;
 import com.splec.Sistema_Marcaje.Service.MarcajeService;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class MarcajeController {
         return marcajeService.registrarEntrada(trabajadorId);
     }
     @PostMapping("/salida/{trabajadorId}")
-    public Marcaje registrarSalida(@PathVariable Long trabajadorId){
+    public MarcajeDTO registrarSalida(@PathVariable Long trabajadorId){
         return marcajeService.registrarSalida(trabajadorId);
     }
 

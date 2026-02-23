@@ -1,5 +1,6 @@
 package com.splec.Sistema_Marcaje.Service;
 
+import com.splec.Sistema_Marcaje.Dto.MarcajeDTO;
 import com.splec.Sistema_Marcaje.Model.Marcaje;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +13,5 @@ public interface IMarcajeService {
     public Marcaje buscarMarcajePorId(Long id);
     public void eliminarMarcajePorId(Long id);
     public Marcaje registrarEntrada(Long trabajadorId);
-    public Marcaje registrarSalida(Long trabajadorId);
+    public MarcajeDTO registrarSalida(Long trabajadorId);
 }

@@ -1,5 +1,6 @@
 package com.splec.Sistema_Marcaje.Service;
 
+import com.splec.Sistema_Marcaje.Dto.MarcajeDTO;
 import com.splec.Sistema_Marcaje.Model.Marcaje;
 import com.splec.Sistema_Marcaje.Model.Trabajador;
 import com.splec.Sistema_Marcaje.Repository.IMarcajeRepository;
@@ -69,7 +70,7 @@ public class MarcajeService implements IMarcajeService {
     }
 
     @Override
-    public Marcaje registrarSalida(Long trabajadorId) {
+    public MarcajeDTO registrarSalida(Long trabajadorId) {
 
         Marcaje marcaje = iMarcajeRepository
                 .findTopByTrabajador_IdAndHoraSalidaIsNullOrderByFechaDesc(trabajadorId)
@@ -78,12 +79,21 @@ public class MarcajeService implements IMarcajeService {
         LocalTime horaSalida = LocalTime.now();
         marcaje.setHoraSalida(horaSalida);
 
-        // ⏱️ Calcular tiempo trabajado
         Duration duracion = Duration.between(marcaje.getHoraEntrada(), horaSalida);
         long minutos = duracion.toMinutes();
-
         marcaje.setMinutosTrabajados(minutos);
 
-        return iMarcajeRepository.save(marcaje);
+        Marcaje marcajeGuardado = iMarcajeRepository.save(marcaje);
+
+        MarcajeDTO dto = new MarcajeDTO();
+        dto.setId(marcajeGuardado.getId());
+        dto.setFecha(marcajeGuardado.getFecha());
+        dto.setHoraEntrada(marcajeGuardado.getHoraEntrada());
+        dto.setHoraSalida(marcajeGuardado.getHoraSalida());
+        dto.setMinutosTrabajados(marcajeGuardado.getMinutosTrabajados());
+        dto.setTrabajadorId(marcajeGuardado.getTrabajador().getId());
+        dto.setNombreTrabajador(marcajeGuardado.getTrabajador().getNombre());
+
+        return dto;
     }
 }
