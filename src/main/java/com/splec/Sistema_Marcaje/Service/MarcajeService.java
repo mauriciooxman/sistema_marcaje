@@ -47,9 +47,8 @@ public class MarcajeService implements IMarcajeService {
     }
 
     @Override
-    public Marcaje registrarEntrada(Long trabajadorId) {
+    public MarcajeDTO registrarEntrada(Long trabajadorId) {
 
-        // 🔎 Verificamos si ya tiene un marcaje abierto
         Optional<Marcaje> marcajeAbierto =
                 iMarcajeRepository.findTopByTrabajador_IdAndHoraSalidaIsNullOrderByFechaDesc(trabajadorId);
 
@@ -66,7 +65,22 @@ public class MarcajeService implements IMarcajeService {
         marcaje.setHoraSalida(null);
         marcaje.setTrabajador(trabajador);
 
-        return iMarcajeRepository.save(marcaje);
+        Marcaje marcajeGuardado = iMarcajeRepository.save(marcaje);
+
+        return convertirADTO(marcajeGuardado);
+    }
+    private MarcajeDTO convertirADTO(Marcaje marcaje) {
+
+        MarcajeDTO dto = new MarcajeDTO();
+        dto.setId(marcaje.getId());
+        dto.setFecha(marcaje.getFecha());
+        dto.setHoraEntrada(marcaje.getHoraEntrada());
+        dto.setHoraSalida(marcaje.getHoraSalida());
+        dto.setMinutosTrabajados(marcaje.getMinutosTrabajados());
+        dto.setTrabajadorId(marcaje.getTrabajador().getId());
+        dto.setNombreTrabajador(marcaje.getTrabajador().getNombre());
+
+        return dto;
     }
 
     @Override

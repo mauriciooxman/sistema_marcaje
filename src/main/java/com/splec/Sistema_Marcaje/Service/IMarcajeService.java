@@ -12,6 +12,6 @@ public interface IMarcajeService {
     public void guardarMarcajes(Marcaje marcaje);
     public Marcaje buscarMarcajePorId(Long id);
     public void eliminarMarcajePorId(Long id);
-    public Marcaje registrarEntrada(Long trabajadorId);
+    public MarcajeDTO registrarEntrada(Long trabajadorId);
     public MarcajeDTO registrarSalida(Long trabajadorId);
 }

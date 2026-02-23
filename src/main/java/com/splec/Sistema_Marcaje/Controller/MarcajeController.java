@@ -33,7 +33,7 @@ public class MarcajeController {
     }
 
     @PostMapping("/entrada/{trabajadorId}")
-    public Marcaje registrarEntrada(@PathVariable Long trabajadorId){
+    public MarcajeDTO registrarEntrada(@PathVariable Long trabajadorId){
         return marcajeService.registrarEntrada(trabajadorId);
     }
     @PostMapping("/salida/{trabajadorId}")
