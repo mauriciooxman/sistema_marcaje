@@ -35,7 +35,7 @@ public class MarcajeController {
     public Marcaje registrarEntrada(@PathVariable Long trabajadorId){
         return marcajeService.registrarEntrada(trabajadorId);
     }
-    @PostMapping("/salida/{trabajadorID}")
+    @PostMapping("/salida/{trabajadorId}")
     public Marcaje registrarSalida(@PathVariable Long trabajadorId){
         return marcajeService.registrarSalida(trabajadorId);
     }

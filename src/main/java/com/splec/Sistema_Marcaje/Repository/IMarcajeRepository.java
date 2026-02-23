@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface IMarcajeRepository extends JpaRepository<Marcaje, Long > {
-    Optional<Marcaje> findTopByTrabajadorIdAndHoraSalidaIsNullOrderByFechaDesc(Long trabajadorId);
+    Optional<Marcaje> findTopByTrabajador_IdAndHoraSalidaIsNullOrderByFechaDesc(Long trabajadorId);
+
 }

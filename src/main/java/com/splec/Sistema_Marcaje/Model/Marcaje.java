@@ -25,6 +25,15 @@ public class Marcaje {
     @ManyToOne
     @JoinColumn(name = "trabajador_id", nullable = false)
     private Trabajador trabajador;
+    private Long minutosTrabajados;
+
+    public Long getMinutosTrabajados() {
+        return minutosTrabajados;
+    }
+
+    public void setMinutosTrabajados(Long minutosTrabajados) {
+        this.minutosTrabajados = minutosTrabajados;
+    }
 
     public Long getId() {
         return id;
