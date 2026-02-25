@@ -49,6 +49,7 @@ public class MarcajeService implements IMarcajeService {
     @Override
     public MarcajeDTO registrarEntrada(Long trabajadorId) {
 
+        //metodo que hace que no se repita un marcaje
         Optional<Marcaje> marcajeAbierto =
                 iMarcajeRepository.findTopByTrabajador_IdAndHoraSalidaIsNullOrderByFechaDesc(trabajadorId);
 
@@ -59,17 +60,21 @@ public class MarcajeService implements IMarcajeService {
         Trabajador trabajador = iTrabajadorRepository.findById(trabajadorId)
                 .orElseThrow(() -> new RuntimeException("Trabajador no encontrado"));
 
+        //si el metodo esta abierto ejecutamos el nuevo marcaje en base al setTrabajador
         Marcaje marcaje = new Marcaje();
         marcaje.setFecha(LocalDate.now());
         marcaje.setHoraEntrada(LocalTime.now());
         marcaje.setHoraSalida(null);
         marcaje.setTrabajador(trabajador);
 
+        //guardamos el marcaje nuevo en marcajeguardado
         Marcaje marcajeGuardado = iMarcajeRepository.save(marcaje);
 
+        //lo convertimos a dto con sus parametros
         return convertirADTO(marcajeGuardado);
     }
-    private MarcajeDTO convertirADTO(Marcaje marcaje) {
+    @Override
+    public MarcajeDTO convertirADTO(Marcaje marcaje) {
 
         MarcajeDTO dto = new MarcajeDTO();
         dto.setId(marcaje.getId());

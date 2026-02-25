@@ -1,5 +1,6 @@
 package com.splec.Sistema_Marcaje.Controller;
 
+import com.splec.Sistema_Marcaje.Dto.TrabajadorDTO;
 import com.splec.Sistema_Marcaje.Model.Trabajador;
 import com.splec.Sistema_Marcaje.Service.TrabajadorService;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +18,15 @@ public class TrabajadorController {
     }
 
     @GetMapping
-    public List<Trabajador>listaTrabajadores(){
+    public List<TrabajadorDTO>listaTrabajadores(){
         return trabajadorService.listaTrabajadores();
     }
 
     @GetMapping("{id}")
-    public Trabajador trabajador(@PathVariable Long id){
+    public TrabajadorDTO trabajador(@PathVariable Long id){
         return trabajadorService.buscarTrabajadorPorId(id);
     }
+
     @PostMapping
    public void saveTrabajador(@RequestBody Trabajador trabajador){
      trabajadorService.saveTrabajador(trabajador);

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Table(name ="trabajadores")
 @Getter
 @Setter
-@NoArgsConstructor
+
 @AllArgsConstructor
 public class Trabajador {
     @Id
